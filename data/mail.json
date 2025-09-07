@@ -1,0 +1,15 @@
+[
+  {
+    "id": "abc",
+    "subject": "test",
+    "fromAddr": "me@example.com",
+    "date": 1757203200000,
+    "isRead": 0,
+    "body": null,
+    "processed": 0,
+    "error": null,
+    "processing_message": null,
+    "intercom_id": null,
+    "processing_time": null
+  }
+]

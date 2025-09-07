@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "key": "foo",
+    "value": "bar",
+    "is_encrypted": false
+  }
+]
