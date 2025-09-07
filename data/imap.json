@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "key": "imap_password",
+    "value": "pa73861w0rd",
+    "is_encrypted": true
+  },
+  {
+    "id": 2,
+    "key": "imap_host",
+    "value": "imap.test.example",
+    "is_encrypted": false
+  },
+  {
+    "id": 3,
+    "key": "imap_username",
+    "value": "user@example.com",
+    "is_encrypted": false
+  },
+  {
+    "id": 4,
+    "key": "imap_port",
+    "value": "993",
+    "is_encrypted": false
+  },
+  {
+    "id": 5,
+    "key": "imap_use_ssl",
+    "value": "true",
+    "is_encrypted": false
+  },
+  {
+    "id": 6,
+    "key": "imap_folder",
+    "value": "INBOX",
+    "is_encrypted": false
+  },
+  {
+    "id": 7,
+    "key": "imap_connection_timeout",
+    "value": "30",
+    "is_encrypted": false
+  }
+]
