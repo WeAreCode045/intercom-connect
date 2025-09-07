@@ -166,6 +166,49 @@ export function createOrUpdateSetting({ id, key, value, category, is_encrypted }
   }
 }
 
+// Overwrite a category file with a plain object (key -> value)
+export function saveSettingsObject(category, obj) {
+  try {
+    const cat = SETTINGS_CATEGORIES.includes(category) ? category : 'general';
+    const arr = [];
+    let idx = 1;
+    for (const [k, v] of Object.entries(obj || {})) {
+      const is_encrypted = String(k || '').toLowerCase().includes('password') || String(k || '').toLowerCase().includes('token');
+      const stored = is_encrypted ? encryptValue(v) : v;
+      arr.push({ id: idx++, key: k, value: stored, is_encrypted: !!is_encrypted });
+    }
+    saveJsonSettings(cat, arr);
+    return true;
+  } catch (err) {
+    console.error('saveSettingsObject error', err && err.message);
+    return false;
+  }
+}
+
+// Overwrite mail.json with provided array of email objects
+export function saveEmailsArray(arr) {
+  try {
+    const emails = Array.isArray(arr) ? arr.map(e => ({
+      id: String(e.id),
+      subject: e.subject || '',
+      fromAddr: e.from || e.fromAddr || '',
+      date: e.date ? (new Date(e.date)).getTime() : Date.now(),
+      isRead: e.isRead ? 1 : 0,
+      body: e.body || null,
+      processed: e.processed ? 1 : 0,
+      error: e.error || null,
+      processing_message: e.processing_message || null,
+      intercom_id: e.intercom_id || null,
+      processing_time: e.processing_time || null,
+    })) : [];
+    saveJsonDb(emails);
+    return true;
+  } catch (err) {
+    console.error('saveEmailsArray error', err && err.message);
+    return false;
+  }
+}
+
 export function getEmails(limit = 50) {
   const data = loadJsonDb();
   const sorted = data.sort((a, b) => (b.date || 0) - (a.date || 0)).slice(0, limit);

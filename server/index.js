@@ -4,6 +4,7 @@ import cors from 'cors';
 import Imap from 'imap';
 import { simpleParser } from 'mailparser';
 import { upsertEmail, getEmails } from './db.js';
+import { saveSettingsObject, saveEmailsArray } from './db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -292,6 +293,26 @@ app.post('/api/settings/:category/bulk', async (req, res) => {
     return res.status(500).json({ success: false, error: err.message });
   }
 });
+
+  // Replace entire settings object for a category with a plain key->value object
+  app.post('/api/sync/settings', (req, res) => {
+    const { category, object } = req.body || {};
+    if (!category || typeof object !== 'object') {
+      return res.status(400).json({ ok: false, error: 'category and object required' });
+    }
+    const ok = saveSettingsObject(category, object);
+    return res.json({ ok });
+  });
+
+  // Replace entire emails array (mail.json)
+  app.post('/api/sync/emails', (req, res) => {
+    const { emails } = req.body || {};
+    if (!Array.isArray(emails)) {
+      return res.status(400).json({ ok: false, error: 'emails array required' });
+    }
+    const ok = saveEmailsArray(emails);
+    return res.json({ ok });
+  });
 
 app.post('/api/settings', async (req, res) => {
   try {
