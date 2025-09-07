@@ -1,0 +1,18 @@
+{
+  "name": "mail-sync-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "NODE_ENV=development node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+  "imap": "^0.8.19",
+  "mailparser": "^3.6.4",
+  "better-sqlite3": "^8.1.0"
+  }
+}
