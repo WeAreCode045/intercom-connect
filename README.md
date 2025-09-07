@@ -4,26 +4,24 @@ Vite + React frontend with a small Express backend for IMAP/Intercom integration
 
 ## Running the app (development)
 
-All dependencies are consolidated in the repository root. Use the single dev command to start both the backend (Express) and the frontend (Vite middleware).
+This repository now contains a frontend built with Vite. Run the dev server with the standard Vite command:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Environment variables
+For production, build and preview the static site:
 
-Create a `.env` in the repository root (or set environment variables in your shell). Important variables:
-
-- `PORT` - server port (default: 4000)
-- `SETTINGS_SECRET` - AES-256-GCM key used to encrypt sensitive settings (required for encrypted fields)
-- IMAP credentials when using IMAP endpoints:
-	- `IMAP_HOST`, `IMAP_PORT`, `IMAP_USER`, `IMAP_PASSWORD`, `IMAP_SECURE`
+```bash
+npm run build
+npm run start
+```
 
 Notes
 
-- The server exposes API routes under `/api/*` and serves the frontend via Vite in development or the built `dist/` in production.
-- Use `npm run build` then `npm start` to serve the built frontend in production mode.
+- This is a frontend-focused repository. Any previous backend (Express/IMAP) was removed to simplify development and avoid native build issues.
+- If you need remote sync or IMAP fetching, consider running a separate service or re-adding a server component.
 
 ## Building (production)
 

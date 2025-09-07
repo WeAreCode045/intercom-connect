@@ -1,2 +1,7 @@
 */node_modules
 node_modules
+
+# ignore env and logs
+.env
+*.log
+server/
